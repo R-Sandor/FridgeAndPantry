@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Fridge &amp; Pantry</string>
+    <string name="addItemButton">Add Item</string>
+    <string name="rmItemButton">Remove Item</string>
+    <string name="item_name">Enter Item Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="title">Grocery List - Add Item</string>
+    <string name="date">Date</string>
+    <string name="optional">Optional</string>
+    <string name="unit">Unit</string>
+    <string name="acceptBtn">Add</string>
+    <string name="cancelBtn">Cancel</string>
+    <string name="switchString">Add to Inventory?</string>
+    <string name="infoText">Toggle Off to add to grocery list</string>
+</resources>
