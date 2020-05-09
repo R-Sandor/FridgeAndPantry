@@ -8,11 +8,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
-    private ArrayList<String> mDataset;
-
+public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.MyViewHolder> {
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -22,30 +20,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
             itemNameTextView =  (TextView) itemView.findViewById(R.id.myItem2);
         }
     }
+    private final LayoutInflater mInflater;
+    private List<Item> mItems;
 
-    // Provide a suitable constructor (depends on the kind of dataset)
-    public ItemAdapter(ArrayList<String> myDataset) {
-        mDataset = myDataset;
-    }
-
+    ItemListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public ItemAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                       int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        // Inflate the custom layout
-        View itemView = inflater.inflate(R.layout.item_list_view, parent, false);
-
-
-
-        //...
+    public ItemListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = mInflater.inflate(R.layout.item_list_view, parent, false);
         MyViewHolder vh = new MyViewHolder(itemView);
         return vh;
     }
@@ -53,22 +39,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.itemNameTextView.setText(mDataset.get(position));
-
+        if (mItems != null) {
+            Item current = mItems.get(position);
+            holder.itemNameTextView.setText(current.getItemName());
+        } else {
+            // Covers the case of data not being ready yet.
+            holder.itemNameTextView.setText("No Word");
+        }
     }
 
+    void setItems(List<Item> items){
+        mItems = items;
+        notifyDataSetChanged();
+    }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        if (mItems != null)
+            return mItems.size();
+        else return 0;
     }
-
-
-
-
 }
 
 

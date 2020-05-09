@@ -19,7 +19,6 @@ public class AddItemActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
 
-        mItem = new Item();
         acceptButton = findViewById(R.id.acceptBtn);
         acceptButton.setOnClickListener(new View.OnClickListener()
         {
@@ -31,7 +30,7 @@ public class AddItemActivity extends Activity {
                 String itemName = editText.getText().toString();
 
                 editText = (EditText) findViewById(R.id.quantityEdit);
-                double quantity = Double.parseDouble(editText.getText().toString());
+                int quantity = Integer.parseInt(editText.getText().toString());
 
                 editText = (EditText) findViewById(R.id.unitTypeEdit);
                 String unit = editText.getText().toString();
@@ -42,14 +41,9 @@ public class AddItemActivity extends Activity {
                 intent.putExtra("glUnit", unit);
                 setResult(RESULT_OK, intent);
                 finish();
-
-
             }
         });
-
     }
-
-
 
 
     public void onButtonClick(View view) {
@@ -64,13 +58,5 @@ public class AddItemActivity extends Activity {
         setResult(RESULT_OK, intent);
         finish();
     }
-//    public View onCreateView(LayoutInflater layoutInflater, ViewGroup container,
-//                             Bundle savedInstanceState){
-//        View v = layoutInflater.inflate(R.layout.add_item_activity, container, false);
-//       // Intent intent = getIntent();
-//        return v;
-//    }
-
-
 
 }
